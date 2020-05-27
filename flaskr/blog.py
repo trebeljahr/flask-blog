@@ -56,6 +56,12 @@ def get_post(id, check_author=True):
     return post
 
 
+@bp.route('/<int:id>/view')
+def view(id):
+    post = get_post(id, False)
+    return render_template('blog/post.html', post=post)
+
+
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):
