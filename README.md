@@ -4,7 +4,7 @@
 
 ### The ones that are crossed out I have already done, the rest I still want to do for learning.
 
-1. A detail view to show a single post. Click a post’s title to go to its page.
+1. ~~A detail view to show a single post. Click a post’s title to go to its page.~~
 1. Like / unlike a post.
 1. Comments.
 1. Tags. Clicking a tag shows all the posts with that tag.
