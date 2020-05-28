@@ -24,6 +24,9 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    from . import util
+    app.url_map.converters['list'] = util.ListConverter
+
     def hello():
         return 'Hello, World!'
 

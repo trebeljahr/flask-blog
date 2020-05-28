@@ -62,6 +62,8 @@ def comment(post_id):
     return redirect(url_for('blog.view', id=post_id))
 
 
+@bp.route('/<int:post_id>/comment', methods=('POST', ))
+@login_required
 def get_post(id, check_author=True):
     post = get_db().execute(
         'SELECT p.id, title, body, created, author_id, username'
@@ -75,6 +77,21 @@ def get_post(id, check_author=True):
         abort(403)
 
     return post
+
+
+@bp.route('/posts/tags/<list:tags>', methods=('GET', ))
+def get_posts_by_tag(tags):
+    posts = get_db().execute(
+        'SELECT b.title'
+        'FROM tagmap bt, post b, tag t'
+        'AND (t.name IN (?))'
+        'AND b.id = bt.post_id'
+        'GROUP BY b.id'
+        'HAVING COUNT( b.id )=?', (
+            tags,
+            len(tags),
+        )).fetchall()
+    return render_template('blog/tags.html', posts=posts, tags=tags)
 
 
 def get_comments(post_id):

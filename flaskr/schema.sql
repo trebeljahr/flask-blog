@@ -28,6 +28,18 @@ CREATE TABLE likes (
   FOREIGN KEY (post_id) REFERENCES post (id)
 );
 
+CREATE TABLE tag (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL
+);
+
+CREATE TABLE tagmap (
+  post_id INTEGER NOT NULL,
+  tag_id INTEGER NOT NULL,
+  FOREIGN KEY (post_id) REFERENCES post (id),
+  FOREIGN KEY (tag_id) REFERENCES tag (id)
+);
+
 CREATE TABLE comments (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   author_id INTEGER NOT NULL,
